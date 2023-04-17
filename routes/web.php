@@ -35,3 +35,7 @@ $router->get('/ControllerSample/{a}/{b}',"Sample@add");
 $router->get('/alluser', "User@getAlluser");
 
 $router->post('/newuser', "User@insertuser");
+
+$router->put('/updateuser', "User@updateUser");
+
+$router->delete('/removeuser', "User@deleteUser");

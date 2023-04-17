@@ -22,5 +22,18 @@ class User extends Controller{
         $usermodel = new Usermodel();
         return  $usermodel->insertuserModel( $name, $password, $email);
     }
+
+    public function updateUser(Request $request){
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $password = $request->input('password');
+        $email = $request->input('email');
+        return $this->usermodel->updateuserModel( $id,$name, $password, $email);
+    }
+
+    public function deleteUser(Request $request){
+        $id = $request->input('id');
+        return $this->usermodel->deleteuserModel($id);
+    }
 }
 
