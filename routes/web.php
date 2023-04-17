@@ -34,4 +34,4 @@ $router->get('/ControllerSample/{a}/{b}',"Sample@add");
 
 $router->get('/alluser', "User@getAlluser");
 
-$router->post('newuser', "User@insertuser");
+$router->post('/newuser', "User@insertuser");

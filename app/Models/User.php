@@ -8,9 +8,10 @@ class User{
         $response = DB::select($sql);
         return $response;
     }
-    public function insert(){
-        $sql = "insert in to user (id,name,password,email) values (:id, :name, :password, :email)";
-        $response = DB::insert([$sql , 'id'=>$id, 'name'=>$name, 'password'=>$password, 'email'=>$email]);
+    public function insertuserModel( $name, $password, $email){
+        error_log($name);
+        $sql = "insert into user (id,name,password,email) values (:id, :name, :password, :email)";
+        $response = DB::insert($sql , ['id'=>NULL, 'name'=>$name, 'password'=>$password, 'email'=>$email]);
         return $response;
     }
 }
