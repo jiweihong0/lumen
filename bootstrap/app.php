@@ -78,10 +78,18 @@ $app->middleware([
     App\Http\Middleware\Authmiddleware::class,
     App\Http\Middleware\CheckPrevilege::class
 ]);
+$app->routeMiddleware([
+    'EnsureRole' => App\Http\Middleware\EnsureRoles::class,
+    'first' => App\Http\Middleware\routemiddleware_1::class,
+    'second' => App\Http\Middleware\routemiddleware_2::class,
+]);
+
 
 // $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
+//     'auth' => App\Http\Middleware\Authmiddleware::class,
+//     'checkprevilege' => App\Http\Middleware\CheckPrevilege::class
 // ]);
+
 
 /*
 |--------------------------------------------------------------------------

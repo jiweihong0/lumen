@@ -32,10 +32,16 @@ $router->get('/ControllerSample/{name}',"Sample@name");
 
 $router->get('/ControllerSample/{a}/{b}',"Sample@add");
 
-$router->get('/alluser', "User@getAlluser");
+$router->get('/alluser',"User@getAlluser");
 
 $router->post('/newuser', "User@insertuser");
 
 $router->put('/updateuser', "User@updateUser");
 
 $router->delete('/removeuser', "User@deleteUser");
+
+$router->post('/login',['middleware' => 'auth', 'uses' => 'User@login']);
+
+$router->post('/middleware', ['middleware' => ['first','second'], function () {
+    return "Hello World";
+}]);

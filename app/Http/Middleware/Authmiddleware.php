@@ -4,17 +4,46 @@ use Closure;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Exception;
+use App\Models\User;
+
+// 去Controller  User.php  確認 user 和 password
+
 
 class Authmiddleware {
     public function handle($request, Closure $next)
     {
         switch ($request->path()) {
-            case 'doLogin':
-                $token = $this->genToken(1);
+            case 'doLogin':  
+                 
+                $id = $request->header('id');
+                $pass = $request->header('password');
+              
+                // 訪問model
+                $user = new User();
+                $isAuthorized = $user->loginModel($id, $pass);
 
-                return response($token, 200);
+                if ($isAuthorized){
+                    $token = $this->genToken($id);
+                    return response($token, 200);
+                }
+                else{
+                    return response("帳號密碼錯誤",401);
+                };
+            
             case 'register':
-                break;
+                $pass = $request->input('password');
+                $name = $request->input('name');
+                $email = $request->input('email');
+                $user = new User();
+                $isAuthorized = $user->registerModel( $name, $pass, $email);
+                // $isAuthorize 拿id
+
+                if ($isAuthorized){
+                    return response("註冊成功", 200);
+                }
+                else{
+                    return response("帳號已存在",401);
+                };
             default:
                 // $jwtToken = $request->header('jwtToken');
                 $isTokenvailed = $this->checkToken($request);

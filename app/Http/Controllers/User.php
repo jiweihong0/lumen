@@ -35,5 +35,9 @@ class User extends Controller{
         $id = $request->input('id');
         return $this->usermodel->deleteuserModel($id);
     }
+
+    public function login($id, $password){
+        return $this->usermodel->loginModel($id, $password);
+    }
 }
 
